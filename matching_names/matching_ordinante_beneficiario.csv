@@ -1,7 +1,7 @@
 COD_MOVIMENTO,ORDINANTE,BENEFICIARIO,MATCH
-12536,Aldo Vanni - Remo Stazzi, Stazzi Giorgia,2
+12536,Aldo Vanni - Remo Stazzi, STazzi Giorgia,2
 65879,Aldo Vanni - Remo Stazzi, Stazzi Remo,3
-14235,Aldo Vanni Remo Stazzi, Gloria Neppi,0
+14235,Aldo Vanni Remo Stazzi, Gloria Vanni,1
 31567,"Giorgia Stazzi, Remo Stazzi",Giacinto Oscano,0
 98989,Giorgia Stazzi/Remo Stazzi,Giacinto Oscano,0
 98987,Giorgia Ramarindo Mazziconi,Giorgia Stazzi,1
@@ -10,3 +10,6 @@ COD_MOVIMENTO,ORDINANTE,BENEFICIARIO,MATCH
 81324,Giorgia R. Mazziconi srl,Amica Chic S.r.l.,0
 78789,Giorgia R. Mazziconi srl,Amica Chic S. r. l.,0
 12895,Giorgia R.Mazziconi,Giancarlo Mazziconi,2
+12895,Giorgia R.Mazziconi,"Giancarlo Mazziconi, Stazzi Giorgia",3
+12895,Giorgia R. Mazziconi - Giacinto Oscano,"Giacinto De Pitis, Stazzi Giorgia",3
+12895,Giorgia R. Mazziconi - Dino Di Iorio,"Dino Di Renzo, Stazzi Giorgia",2
