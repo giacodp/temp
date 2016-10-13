@@ -1,0 +1,101 @@
+<html>
+<head>
+    <script src="lib/d3.v3.min.js"></script>
+    </head>
+    <!--
+    Per controllare che d3 è stato caricato dal developer tool, andare su console e scrivere
+    d3.version*/ -->
+    
+    
+    
+    
+    
+    <body>
+    
+    
+            <svg width='500' height='300'>
+        
+            <script>
+        
+                d3.select("svg")
+                    .append("rect")
+                    .attr("width",40)
+                    .attr("height",0)
+                    .attr("y",110)
+                    .transition()/*crea un'animazione che dura 2 secondi*/
+                    .duration(2000)
+                    .ease('bounce')/* come si fanno a vedere gli altri tipi? basta cercare ease d3.js su google*/
+                    .attr('height',80)
+                    .attr('y',30)
+                
+                
+                 d3.select("svg")   
+                    .append("rect")
+                    .attr("width",40)
+                    .attr("height",50)
+                    .attr("y",60)
+                    .attr("x",45)
+                    .attr("fill","orange")
+                    /*.transition()
+                    .duration(2000)
+                    .delay(1000)
+                    .attr('height',50)
+                    .attr('y',60)*/
+                    .on('click', function(){
+                        d3.select(this)
+                            .transition()
+                            .duration(2000)
+                            .attr('fill','green')
+                     console.log('hey') /*stampa su console 'hey*/
+                    })
+                    
+                var myrect = d3.select("svg") /*permette di usare transition e l'on dopo*/
+                    .append("rect")
+                    .attr('width',40)
+                    .attr("height",0)
+                    .attr("y",110)
+                    .attr("x",90)
+                
+                    myrect
+                    .transition()
+                    .duration(2000)
+                    .delay(2000)
+                    .ease('elastic')
+                    .attr('height',100)
+                    .attr('y',10)
+                    
+                    myrect
+                    .on('click', function(){
+                        d3.select(this)
+                            .transition()
+                            .duration(2000)
+                            .attr('fill','orange')
+                    })
+                    
+                    myrect
+                    .on('mouseenter', function(){ /*anche mouseover*/
+                        d3.select(this)
+                            .attr('fill','red')
+                    })
+                    
+                    myrect
+                    .on('mouseleave', function(){ /*anche mouseout*/
+                        d3.select(this)
+                            .attr('fill','black')
+                    })
+        
+            </script>
+            </svg>
+    
+    
+    </body>
+    
+    
+    
+    
+
+
+
+
+
+</html>

@@ -1,0 +1,107 @@
+<html>
+
+
+    <head>
+    
+        <script src="lib/d3.v3.min.js"></script>
+    
+    </head>
+
+    <body>
+    
+            <svg height="10000"></svg> <!-- fondamentale tenere il canvas fuori perché altrimenti non viene messo perché non c'è ancora il dataset -->
+            <script>
+        
+                d3.csv('athletes_sochi.csv',
+                       function(data){
+                    console.log('loaded')
+                    console.log(data)
+                    console.log(data[0].age) /* prende l'età del primo elemento */
+                    
+                    //d3.select('svg')
+                    //    .selectAll('rect')
+                    //    .data(data)
+                    //    .enter()
+                    //    .append('rect')/* per ogni oggetto dell'array legagli un rect */
+                    //    .attr('height',5)
+                    //    .attr('y',function(d,i){ /* per convenzione si usano sempre queste due lettere d e i*/
+                    //    return i*6 /* sposta di 6 iterativamente tutti i rettangoli */
+                    //    })
+                    //    .attr('width', function(d,i){
+                    //        return d.age
+                    //    })
+                    
+                    d3.select('svg')
+                        .selectAll('circle')
+                        .data(data)
+                        .enter()
+                        .append('circle')
+                        .attr('r',function(){
+                            return 1
+                        })
+                        .attr('cx',function(d,i){
+                        return d.weight*2
+                        })
+                        .attr('cy', function(d,i){
+                            return d.height*100
+                        })
+                        .attr('opacity',.1)
+                    
+                    var rects = d3.select('svg')
+                        .selectAll('rect')
+                        .data(data)
+                        .enter()
+                        .append('rect')
+                        .attr('width',5)
+                        .attr('x',function(d,i){
+                        return i*6
+                        })
+                        .attr('height', 100)
+                        
+                        
+                        .attr('y',function(d,i){
+                            return 100-d.age
+                        })
+                        .attr('opacity',0)
+                        rects.transition()
+                        .duration(2500)
+                        .delay(function(d,i){
+                                return 100*i
+                            })
+                        .attr('opacity',1)
+                        .attr('height', function(d,i){
+                        return d.age
+                        })
+                        
+                    
+                        rects
+                        .on('click', function(d,i){
+                            console.log(d) /* la console mi fa vedere l'oggetto cliccato con tutti i suoi attributi */
+                            
+                            if(d.clicked){
+                                d3.select(this)
+                                .attr('fill','black')
+                                d.clicked = false
+                            }else{
+                                d3.select(this)
+                                .attr('fill','orange')
+                                d.clicked = true
+                            }
+                            
+                        })
+                        
+                        
+
+                    
+                })
+            
+                console.log('hey') /* viene scitto prima hey che loaded perché javascript non è sequenziale altrimenti frizzarebbe ogni volta che carico qualcosa*/
+                
+            </script>
+    
+    
+    </body>
+
+
+
+</html>

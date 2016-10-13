@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <script src="lib/d3.v3.min.js"></script>
+    </head>
+    <!--
+    Per controllare che d3 è stato caricato dal developer tool, andare su console e scrivere
+    d3.version*/ -->
+    
+    
+    
+    
+    
+    <body>
+    
+    
+            <svg></svg>
+        
+            <script>
+        
+                d3.select('svg')
+                    .append('rect')
+                    .attr('width',100)
+                    .attr('height',100)
+                
+                d3.select('body')
+                    .append('svg')
+                    .append('rect')
+                    .attr('width',100)
+                    .attr('height',100)
+                    
+                d3.select('body')
+                    .append('svg')
+                    .append('rect')
+                    .attr('circle')
+                    .attr('r',100) /* il cerchio dentro il tag rectangolo non è definito quindi non lo mostra */
+        
+            </script>
+    
+    
+    </body>
+    
+    
+    
+    
+
+
+
+
+
+</html>

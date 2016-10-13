@@ -1,0 +1,76 @@
+<html>
+            <head>
+    
+                    <!-- il CSS è questo (tutta la roba dentro style) -->
+                    <style>
+                
+                        svg{
+                            border:1px solid red;
+                        }
+                        
+                        h1{
+                            color:orange;
+                        }
+                        #titolorosso{
+                            color:red;
+                        }
+                        .altri_titoli{
+                            color:green;
+                        }
+                        rect{
+                            fill:red /*
+                                comanda sul fill del rect nell'html
+                                */
+                        }
+                
+                /*
+                Questo è il modo di commentare in CSS
+                */
+                    </style>
+    
+    
+    
+            </head>
+            <body>
+            
+            <h1> Titolo</h1>
+            <h1 id="titolorosso">Titolo 2</h1>
+            <h1 class="altri_titoli">Titolo 3</h1>
+            <h1 class="altri_titoli">Titolo 4</h1>
+                
+                
+            <svg>
+                
+                
+                <rect fill="green" width="20"
+                      height="20"></rect>
+                
+                <circle r="5" cx="100"
+                        cy="50">
+                </circle>
+                
+                <text x="50" y="50">testo</text>
+                
+                <g
+                   transform="translate(100,100)">
+                <circle fill="red" r="5"
+                        cx="100" cy="50"></circle>
+                </g> <!-- dov'è finito il cerchio rosso? guardare su chrome settings>more tools>developer tools -->
+                
+                
+                
+                
+                
+            </svg>    
+                
+                
+                
+                
+            </body>
+    
+    
+        
+
+
+
+</html>
