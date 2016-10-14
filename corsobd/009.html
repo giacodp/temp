@@ -1,0 +1,77 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg></svg>
+        
+        
+        <script>
+        
+            var dataset = [3,67,6,8,23,56,8,23,5]
+            //var dataset =[{a:3},{a:67},{a:6},{a:8},...,{5}] è per fare una lista di oggetti: ad esempio la variabile clicked qui possiamo aggiungerla, nell'array statico no
+            
+            var mygroups = d3.select('svg')
+                .selectAll('g')
+                .data(dataset)
+                .enter()
+                .append('g')
+                .attr('transform', function(d,i){
+                    return 'translate(' + i*25 + ',' + (100 - d) +')'
+                })
+                .on('mouseover', function(){ /*anche mouseenter*/
+                        d3.select(this)
+                            .attr('fill','red')
+                })
+                .on('mouseout', function(){ /*anche mouseleave*/
+                        d3.select(this)
+                            .attr('fill','black')
+                })
+            
+                mygroups.append('circle')
+                .attr('r', 5)
+                .attr('cx',10)
+                .attr('cy',-100) // estetico: per la transition
+                .transition()
+                .duration(2000)
+                .delay(function(d,i){
+                    return 100*i
+                })
+                .ease('bounce')
+                .attr('cy', 0)
+            
+                mygroups.append('text')
+                .text(function(d,i){
+                    return d
+                })
+                .attr('y', 20)
+                .attr('x', 10)
+                .attr('text-anchor', 'middle')
+                .attr('opacity',0)
+                
+                mygroups.on('mouseenter', function(){ // sovrascrive eventuali mouseenter del gruppo, ecco perché ho usato mouseover che fa la stessa cosa ma è un evento diverso
+                    d3.select(this)
+                    .select('text')
+                    .attr('opacity', 1)
+                })
+                
+                mygroups.on('mouseleave', function(){
+                    d3.select(this)
+                    .select('text')
+                    .attr('opacity', 0)
+                })
+        
+        
+        
+        
+        
+        
+        </script>
+        
+    </body>
+
+</html>

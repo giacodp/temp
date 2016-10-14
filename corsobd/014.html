@@ -1,0 +1,72 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg></svg>
+        
+        
+        <script>
+        
+            d3.csv('athletes_sochi.csv',
+                       function(dataset){
+                    console.log('loaded')
+                    console.log(dataset)
+                    
+                var byCountry = d3.nest()
+                    .key(function(d,i){
+                        return d.country
+                    })
+                    .entries(dataset)
+            
+            byCountry.sort(function(a,b){
+                return d3.descending(a.values.length,b.values.length) // devo mettere value perché il nest mette gli attributi dentro values mentre la key è la nazione in questo caso
+            })
+            
+            console.log(byCountry)
+            
+            var min = d3.min(byCountry, function(d,i){
+                return d.values.length
+            })
+            
+            var max = d3.max(byCountry, function(d,i){
+                return d.values.length
+            })
+            
+            var bar_width = 300 / byCountry.length
+                
+            
+            var myscale = d3.scale.linear() // fa la conversione x:y = w:z dove x e w sono altezza e larghezza dell'svg, y e z del dataset
+            
+            
+            .range([0,150]) // è il default dell'svg
+            .domain([min, max])
+                
+            
+            d3.select('svg')
+                .selectAll('rect')
+                .data(byCountry)
+                .enter()
+                .append('rect')
+                .attr('width',bar_width-1)
+                .attr('height',function(d,i){
+                    return myscale(d.values.length)
+                })
+                .attr('x', function(d,i){
+                    return i*bar_width
+                })
+        
+        
+        
+        
+        
+        })
+        </script>
+        
+    </body>
+
+</html>

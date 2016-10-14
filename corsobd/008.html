@@ -1,0 +1,63 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg></svg>
+        
+        
+        <script>
+        
+            var dataset = [3,67,6,8,23,56,8,23,5]
+            
+            var mygroups = d3.select('svg')
+                .selectAll('g')
+                .data(dataset)
+                .enter()
+                .append('g')
+                .attr('transform', function(d,i){
+                    return 'translate(' + i*26 + ',0)'
+                })
+            
+                mygroups.append('rect')
+                .attr('width', 25)
+                .attr('height', function(d,i){
+                    return d
+                })
+                .attr('y', function(d,i){
+                    return 100 - d
+                })
+                //.attr('x', function(d,i){
+                //    return i*26
+                //})                            non serve più
+                //.attr('y', function(d,i){
+                //    return 100 -d
+                //})
+            
+                mygroups.append('text')
+                .text(function(d,i){
+                    return d
+                })
+                .attr('y', 120)
+                .attr('x', 5)
+                //.attr('x', function(d,i){
+                //    return i*26 + 5
+                //})                            non serve più
+                //.attr('y', function(d,i){
+                //    return 100 -(d+5)
+                //})
+        
+        
+        
+        
+        
+        
+        </script>
+        
+    </body>
+
+</html>

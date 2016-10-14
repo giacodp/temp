@@ -1,0 +1,71 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg width="10000"></svg>
+        
+        
+        <script>
+        
+            //var dataset = [3,67,6,8,23,56,8,23,5,58,2]
+            //var dataset = [{age:3},{age:32},{age:13},{age:5},{age:6}]
+            d3.csv('athletes_sochi.csv',
+                       function(dataset){
+                    console.log('loaded')
+                    console.log(dataset)
+            
+            dataset.sort(function(a,b){ // funzione che ordina: confronta l'elemento a con b. SORT sovrascrive il dataset
+            //    return d3.descending(a,b) // per l'array statico
+                return d3.descending(a.weight,b.weight)
+            })
+            
+            var youth = dataset.filter(function(d){ // non sovrascrive il dataset quindi devo mettere il risultato in un nuovo dataset
+                
+                //return d.age < 10 per un dataset di oggetti numerici
+                
+                return parseInt(d.age) < 18 // <- per trasformare la stringa age in numero intero. Se si vuole trasformare in float parseFloat() (NB. tutto ciò che viene importato in csv o json o quant'altro è stringa)
+            })
+            
+            console.log(youth)
+            
+            /*d3.select('svg')
+                .selectAll('rect')
+                .data(dataset)
+                .enter()
+                .append('rect')
+                .attr('width',5)
+                .attr('height',function(d,i){
+                    return d.age
+                })
+                .attr('x', function(d,i){
+                    return i*6
+                })*/
+            
+            d3.select('svg')
+                .selectAll('rect')
+                .data(youth)
+                .enter()
+                .append('rect')
+                .attr('width',5)
+                .attr('height',function(d,i){
+                    return d.weight
+                })
+                .attr('x', function(d,i){
+                    return i*6
+                })
+        
+        
+        
+        
+        
+        })
+        </script>
+        
+    </body>
+
+</html>

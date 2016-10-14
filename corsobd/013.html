@@ -1,0 +1,61 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg width="10000"></svg>
+        
+        
+        <script>
+        
+            d3.csv('athletes_sochi.csv',
+                       function(dataset){
+                    console.log('loaded')
+                    console.log(dataset)
+                    
+                var byAge = d3.nest()
+                    .key(function(d,i){
+                        return d.age
+                    })
+                    .entries(dataset)
+            
+            byAge.sort(function(a,b){
+                return d3.ascending(a.values.length,b.values.length) // devo mettere value perché il nest mette gli attributi dentro values mentre la key è la nazione in questo caso
+            })
+            
+            console.log(byAge)
+            
+            //var youth = byAge.filter(function(d){
+            //    return parseInt(d.key) < 50
+            //})
+            
+            console.log(byAge)
+            
+            d3.select('svg')
+                .selectAll('circle')
+                .data(byAge)
+                .enter()
+                .append('circle')
+                //.attr('',10)
+                .attr('r',function(d,i){
+                    return d.values.length
+                })
+                .attr('cx', function(d,i){
+                    return i*11
+                })
+                .attr('cy',10) //giusto per farli vedere 
+        
+        
+        
+        
+        
+        })
+        </script>
+        
+    </body>
+
+</html>

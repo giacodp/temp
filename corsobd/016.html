@@ -1,0 +1,133 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    
+    <body>
+    
+            <svg></svg>
+        
+        
+        <script>
+        
+            d3.csv('athletes_sochi.csv',
+                       function(dataset){
+                    console.log('loaded')
+                    console.log(dataset)
+                    
+                    function maleSum(arr){
+                        var somma = d3.sum(arr,function(d,i){
+                            return (d.gender == 'Male') ? 1 : 0 // modo spiccio per aggiungere 1 se verificata la condizione
+                        })
+                        return somma
+                    }
+                
+                    function femaleSum(arr){
+                        var somma = d3.sum(arr,function(d,i){
+                            return (d.gender == 'Female') ? 1 : 0
+                        })
+                        return somma
+                    }
+                    
+                var newdata = d3.nest()
+                    .key(function(d){
+                        return d.country
+                    })
+                    .rollup(function(d){ // permette di visualizzare solo i dati che mi servono
+                        return{
+                            male:maleSum(d),
+                            female:femaleSum(d)
+                        }
+                    })
+                    .entries(dataset)
+                
+            console.log(newdata)
+            
+           /* byAge.sort(function(a,b){
+                return d3.ascending(a.values.length,b.values.length) // devo mettere value perché il nest mette gli attributi dentro values mentre la key è la nazione in questo caso
+            })
+            
+            
+            
+            //var youth = byAge.filter(function(d){
+            //    return parseInt(d.key) < 50
+            //})
+            
+            console.log(byAge)
+            
+            var min = d3.min(byAge, function(d,i){
+                return d.values.length
+            })
+            
+            var max = d3.max(byAge, function(d,i){
+                return d.values.length*2
+            })
+            
+            var bar_width = 300 / byAge.length
+                
+            
+            var myscale = d3.scale.linear() // fa la conversione x:y = w:z dove x e w sono altezza e larghezza dell'svg, y e z del dataset
+            
+            
+            .range([0,150]) // è il default dell'svg
+            .domain([min, max])
+            
+            d3.select('svg')
+                .selectAll('circle')
+                .data(byAge)
+                .enter()
+                .append('circle')
+                .attr('r',function(d,i){
+                    return myscale(d.values.length)
+                })
+                .attr('cx', function(d,i){
+                    return i*bar_width
+                })
+                .attr('cy', function(d,i){
+                    return myscale(d.values.length)
+                })
+                //.attr('cy',10) //giusto per farli vedere
+                .attr('opacity',.3)*/
+            
+            var groups = d3.select('svg')
+                .selectAll('g')
+                .data(newdata)
+                .enter()
+                .append('g')
+                .attr('transform', function(d,i){
+                    return 'translate(' + i*10 + ',0)'
+                })
+            
+            groups.append('rect')
+                .attr('width',4)
+                .attr('height', function(d,i){
+                    return d.values.female
+                })
+                .attr('fill', 'pink')
+                .attr('x',4)
+                .attr('y', function(d,i){
+                    return 150 - d.values.female
+                })
+            
+            groups.append('rect')
+                .attr('width',4)
+                .attr('height', function(d,i){
+                    return d.values.male
+                })
+                .attr('fill', 'blue')
+                .attr('y', function(d,i){
+                    return 150 - d.values.male
+                })
+        
+        
+        
+        
+        
+        })
+        </script>
+        
+    </body>
+
+</html>
