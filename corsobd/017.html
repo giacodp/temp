@@ -1,0 +1,97 @@
+<html>
+
+    <head>
+    <script src = "lib/d3.v3.min.js"></script>
+    
+        
+    </head>
+    
+            <body>
+    
+                <svg></svg>
+                
+                
+                <script>
+                
+                
+                    /*var data = d3.range(30).map(function(){
+                        return Math.random() //crea una lista di numeri random tra o a 1, di 30 elementi specificati dal range 
+                    })
+                    console.log(data)*/
+                    
+            function draw(data){
+                
+            
+                
+                var circle = d3.select('svg')
+                    .selectAll('circle')
+                    .data(data)
+                
+                var mapX = d3.scale.linear()
+                    .domain([0, data.length])
+                    //.range([0,300])
+                    .range([20,280]) // solo per farli entrare tutti poiché lo zero del cerchio è il centro e so che la variabile l l'ho settata essere massimo 20
+                
+                circle.enter() //d3 gestisce quale sono i comandi opportuni da eseguire: enter() crea cerchi se non ci sono, transition() viene eseguito quando ci sono già i 10 cerchi, se gli passo una lista più piccola di elementi parte l'exit() che cancellerà i cerchi in più
+                    .append('circle')
+                    .attr('cx', function(d,i){
+                        return mapX(i)
+                    })
+                    .attr('cy',40)
+                    .attr('r',0)
+                circle.exit()
+                    .transition()
+                    .attr('cy',0)
+                    .remove()
+                circle.transition()
+                    .duration(2000)
+                    .delay(function(d,i){
+                        return i*200
+                    })
+                    .attr('r', function(d,i){
+                        return d*10
+                    })
+                    .attr('cx', function(d,i){
+                        return mapX(i)
+                    })
+                
+                
+                }
+                
+                
+                d3.select('svg')
+                    .on('click', function(){
+                        //draw() //crea al click il grafico
+                        var l = parseInt(Math.random()*20)+3
+                        console.log(l)
+                        var data = d3.range(l).map(function(){
+                        return Math.random() //crea una lista di numeri random tra o a 1, di 30 elementi specificati dal range 
+                    })
+                    console.log(data)
+                    draw(data)
+                    })
+                
+                
+                </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </body>
+
+
+
+
+
+
+
+</html>

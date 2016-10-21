@@ -1,0 +1,55 @@
+<html>
+
+    <head>
+        <script src = "lib/d3.v3.min.js"></script>
+    </head>
+
+    <body>
+    
+        <svg></svg>
+        
+        <script>
+        
+            var myarc = d3.svg.arc()
+                .innerRadius(function(d){
+                    return 50
+                })
+                .outerRadius(function(d){
+                    return 150
+                })
+            
+            var data = d3.range(10).map(function(){
+                return Math.random()
+            })
+            
+            console.log(data)
+            
+            var mypie = d3.layout.pie() // i layout sono degli svg più evoluti, non disegnano nulla ma trasformano in maniera opportuna il dataset: in questo caso un array viene trasformato in un oggetto con angoli di partenza e fine
+                .value(function(d,i){
+                    return d
+                })
+            
+            console.log(mypie(data))
+            
+            var colors = d3.scale.category20()
+                          
+            d3.select('svg')
+                .append('g')
+                .attr('transform', 'translate(150,75)')
+                .selectAll('path')
+                .data(mypie(data))
+                .enter()
+                .append('path')
+                .attr('d', function(d,i){
+                    return myarc(d)
+                })
+                .attr('fill', function(d,i){
+                    return colors(i)
+                })
+        
+        </script>
+    
+    </body>
+
+
+</html>

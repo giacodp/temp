@@ -1,0 +1,128 @@
+<html>
+
+    <head>
+    <script src = "lib/d3.v3.min.js"></script>
+    
+    <style>
+        line, path{ /* cambia lo spessore e il colore di tutte le linee dell'svg*/
+            fill:none;
+            stroke:red;
+        }
+        
+        </style>
+        
+    </head>
+    
+            <body>
+    
+                <svg></svg>
+                
+                
+                <script>
+                
+                
+                    /*var data = d3.range(30).map(function(){
+                        return Math.random() //crea una lista di numeri random tra o a 1, di 30 elementi specificati dal range 
+                    })
+                    console.log(data)*/
+                    
+                var axg = d3.select('svg')
+                    .append('g')
+                    .attr('transform','translate(0,100)')
+                
+                var ayg = d3.select('svg')
+                    .append('g')
+                    .attr('transform','translate(30,0)')
+                    
+            function draw(data){
+                
+            
+                
+                var circle = d3.select('svg')
+                    .selectAll('circle')
+                    .data(data)
+                
+                var mapX = d3.scale.linear()
+                    .domain([0, data.length])
+                    .range([20,280])
+                
+                var ax = d3.svg.axis()
+                        .orient('bottom')
+                        .scale(mapX)
+                
+                //d3.select('svg')
+                    //.append('g')
+                    //.attr('transform','translate(0,100)') //così però scrive l'uno sull'altro gli assi. Per ovviare la mettiamo in una variabile axg, in modo che l'asse viene creato ogni volta e spostato
+                //    .call(ax
+                
+                axg.transition()
+                    .call(ax)
+                
+                var ay = d3.svg.axis()
+                        .orient('left')
+                        .scale([2,7])
+                ayg.transition()
+                    .call(ay)
+                
+                circle.enter() //d3 gestisce quale sono i comandi opportuni da eseguire: enter() crea cerchi se non ci sono, transition() viene eseguito quando ci sono già i 10 cerchi, se gli passo una lista più piccola di elementi parte l'exit() che cancellerà i cerchi in più
+                    .append('circle')
+                    .attr('cx', function(d,i){
+                        return mapX(i)
+                    })
+                    .attr('cy',40)
+                    .attr('r',0)
+                circle.exit()
+                    .transition()
+                    .attr('cy',0)
+                    .remove()
+                circle.transition()
+                    .duration(2000)
+                    .delay(function(d,i){
+                        return i*200
+                    })
+                    .attr('r', function(d,i){
+                        return d*10
+                    })
+                    .attr('cx', function(d,i){
+                        return mapX(i)
+                    })
+                
+                
+                }
+                
+                
+                d3.select('svg')
+                    .on('click', function(){
+                        //draw() //crea al click il grafico
+                        var l = parseInt(Math.random()*20)+3
+                        var data = d3.range(l).map(function(){
+                        return Math.random() //crea una lista di numeri random tra o a 1, di 30 elementi specificati dal range 
+                    })
+                    console.log(data)
+                    draw(data)
+                    })
+                
+                
+                </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </body>
+
+
+
+
+
+
+
+</html>

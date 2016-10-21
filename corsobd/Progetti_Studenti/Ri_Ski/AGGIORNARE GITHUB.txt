@@ -1,0 +1,12 @@
+AGGIORNARE GITHUB
+
+  441  git pull
+  442  cd Desktop/BDINTESA/
+  443  git pull
+  444  git status
+  445  git add visualization/Progetti_Studenti/Ri_Ski
+  447  git commit -m "cartella Umberto Giulia Roberto"
+  448  git push
+  449  history
+
+

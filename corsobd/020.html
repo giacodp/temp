@@ -1,0 +1,79 @@
+<html>
+
+    <head>
+    <script src = "lib/d3.v3.min.js"></script>
+    
+        
+    </head>
+    
+            <body>
+    
+                <svg></svg>
+                
+                
+                <script>
+                
+                    var mapx = d3.scale.linear()
+                        .domain([0,20])
+                        .range([0,300])
+                    
+                    var mapy = d3.scale.linear()
+                        .domain([0,1])
+                        .range([0,50])
+                    
+                    var genline = d3.svg.area() // genera una linea complessa spezzata da dare in pasto a path
+                        .x(function(d,i){
+                            return mapx(i)
+                            })
+                        .y(function(d,i){
+                            //return d*100 // sennò il mio range è tra 0 e 1 è non si vede quasi niente
+                            return mapy(d)
+                            })
+                        .y0(function(d,i){
+                            return 150
+                            })
+                        .interpolate('basis') // ammorbidisce la linea
+                    
+                    var mypath = d3.select('svg')
+                    .append('path')
+                    
+                    function draw(data){
+                    
+                    mypath
+                        .transition() // gestisce il passaggio da una linea a un'altra
+                        .attr('d', genline(data))
+                        .attr('fill','green')
+                        .attr('stroke','purple')
+                                  
+                    }
+                    
+                    d3.select('svg').on('click',function(){
+                                        var data = d3.range(20).map(function(){
+                        return Math.random()
+                    })
+                    draw(data)
+                                        })
+                
+                </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </body>
+
+
+
+
+
+
+
+</html>

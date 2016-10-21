@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    
+    
+    
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="lib/d3.v3.min.js"></script>
+    </head>
+    
+    
+    <body>
+        
+        
+    
+        
+        <div id="column">
+        
+            <h1>Titolo Progetto</h1>
+            <h4>Sottotitolo (opzionale)</h4>
+            <p>Nomi partecipanti</p>
+
+            <svg></svg>
+            
+            
+            
+            <script>
+        
+                
+ function vowel_count(str1)  
+{  
+  var vowel_list = 'aeiouAEIOU';  
+  var vcount = 0;  
+    
+  for(var x = 0; x < str1.length ; x++)  
+  {  
+    if (vowel_list.indexOf(str1[x]) !== -1)  
+    {  
+      vcount += 1;  
+    }  
+    
+  }  
+  return vcount;  
+}  
+                         
+                
+
+       
+       d3.csv("dataset/athletes_sochi_lat.csv", function(d){
+            d.impronunciability = vowel_count(d.name)/d.name.length
+                return d 
+       }, 
+              function(data) 
+            
+       
+              {
+        
+
+           console.log(data)
+           
+                var minh = d3.min(data, function(d, i){
+                    return d.height  
+                })
+                
+                var maxh = d3.max(data, function(d, i){
+                    return d.height
+                })
+                
+                var minw = d3.min(data, function(d, i){
+                    return d.impronunciability  
+                })
+                
+                var maxw = d3.max(data, function(d, i){
+                    return d.impronunciability
+                })
+                
+                
+                var bar_width = 300 / data.length
+                
+                var myScaleh = d3.scale.linear()
+                    .domain([minh, maxh])
+                    .range([0, 150])
+                
+                var myScalew = d3.scale.linear()
+                    .domain([minw, maxw])
+                    .range([0, 300])
+           
+
+                
+                d3.select('svg')
+                    .selectAll('circle')
+                    .data(data)
+                    .enter()
+                    .append('circle')
+                    .attr('r', 5)
+                    .attr('opacity', 0.5)
+                     .attr('cy', function(d,i){
+                         return myScaleh(d.height)
+                     })
+                    .attr('cx', function(d,i){
+                         return myScalew(d.impronunciability)
+                     })
+                
+                
+                
+                
+                })
+                
+           
+       
+        
+       
+       
+       
+       
+       
+    
+ 
+       
+        </script>
+    
+            
+            
+            
+            
+            
+            
+            
+        </div>
+        
+    </body>
+    
+</html>
