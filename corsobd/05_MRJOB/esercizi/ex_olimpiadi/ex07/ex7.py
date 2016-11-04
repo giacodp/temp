@@ -9,16 +9,26 @@ from mrjob.step import MRStep
 
 class MREx_07(MRJob):
     def steps(self):
-        return [MRStep(mapper=self.lineMapper,reducer=self.ageReducer)]
+        return [MRStep(mapper=self.lineMapper,reducer=self.ageReducer),
+               MRStep(mapper=self.mapper_max,reducer=self.reducer_max)]
     
     def lineMapper(self, _, line):
-        if line.split(',')[12]=='country':
+        if line.split(',')[11]=='country':
             pass
         else:
-            yield [line.split(',')[2], int(line.split(',')[12])],1
+            yield [line.split(',')[11], 'gold'], int(line.split(',')[6])
+            yield [line.split(',')[11], 'silver'],int(line.split(',')[7])
+            yield [line.split(',')[11], 'bronze'],int(line.split(',')[8])
+            yield [line.split(',')[11], 'total'],int(line.split(',')[9])
     
-    def ageReducer(self, gender, occurrence):
-        yield gender, sum(occurrence)
+    def ageReducer(self, medal, occurrence):
+        yield medal, sum(occurrence)
+
+    def mapper_max(self, medal, occurrence):
+        yield 'max', [occurrence, medal]
+    
+    def reducer_max(self, massimo, paese):
+        yield massimo, max(paese)
 
 if __name__ == '__main__':
     MREx_07.run()
