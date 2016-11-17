@@ -1,0 +1,9 @@
+# THE LECTURES #
+
+    Taught by Feynman Prize winner Professor Yaser Abu-Mostafa.
+
+    The fundamental concepts and techniques are explained in detail. The focus of the lectures is real understanding, not just "knowing."
+
+    Lectures use incremental viewgraphs (2853 in total) to simulate the pace of blackboard teaching.
+    
+URL:    https://work.caltech.edu/lectures.html
